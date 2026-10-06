@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client';
+import { buildServicesHtml, buildAboutHtml, buildTeamHtml, buildFaqHtml } from '../lib/pageGenerators.js';
 
 const prisma = new PrismaClient();
 
@@ -40,7 +41,32 @@ async function main() {
       footer: {
         aboutSummary: "Elevating mental health care in West Palm Beach with an integrated approach combining therapy and psychiatric services.",
         copyright: "© {year} City Psychology PB. All rights reserved.",
-        license: "Licensed Mental Health Counselor · West Palm Beach, FL"
+        license: "Licensed Mental Health Counselor · West Palm Beach, FL",
+        watermarkText: "PSYCHOLOGY",
+        navColumnTitle: "NAVIGATE",
+        contactColumnTitle: "CONTACT",
+        hoursColumnTitle: "HOURS",
+        addressLine1: "1818 South Australian Avenue Suite 404,",
+        addressLine2: "West Palm Beach, FL 33409",
+        phone: "561-537-5586",
+        phoneRaw: "5615375586",
+        email: "dillon@citypsychologypb.com",
+        hours: "Monday – Saturday: By Appointment",
+        hoursNote: "Office & Telehealth sessions available. Flexible scheduling to accommodate your needs.",
+        navLinks: [
+          { id: 'fnav_1', label: 'Home', path: '/', enabled: true },
+          { id: 'fnav_2', label: 'Our Services', path: '/services', enabled: true },
+          { id: 'fnav_3', label: 'Our Team', path: '/team', enabled: true },
+          { id: 'fnav_4', label: 'About Us', path: '/about', enabled: true },
+          { id: 'fnav_5', label: 'Frequently Asked Questions', path: '/faq', enabled: true },
+          { id: 'fnav_6', label: 'Contact', path: '/contact', enabled: true }
+        ],
+        socialLinks: [
+          { id: 'soc_1', platform: 'Facebook', url: 'https://facebook.com', enabled: true },
+          { id: 'soc_2', platform: 'Instagram', url: 'https://instagram.com', enabled: true },
+          { id: 'soc_3', platform: 'LinkedIn', url: 'https://linkedin.com', enabled: true },
+          { id: 'soc_4', platform: 'Twitter / X', url: 'https://twitter.com', enabled: true }
+        ]
       },
       seo: {
         metaTitle: "City Psychology | Premier Mental Health Care in West Palm Beach",
@@ -94,33 +120,86 @@ async function main() {
       enabled: true,
       data: {
         tag: "Our Philosophy",
-        heading: "A sanctuary for modern minds",
-        body1: "In a world that constantly demands more of your attention and energy, City Psychology provides a dedicated space to pause, reflect, and rebuild. We believe mental wellness is not merely the absence of distress, but the foundation for a vibrant, purposeful life.",
-        body2: "Our practice bridges the gap between traditional clinical therapy and modern psychiatric medicine. We tailor every treatment plan to the individual, honoring the complexity of your personal journey with evidence-based methods and deep empathy."
+        heading: "Guiding Families",
+        highlightText: "to Brighter Futures",
+        body1: "For over a decade, City Psychology has dedicated itself to working with children, individuals, and families addressing everything from severe mental illness and trauma to addiction and relationship challenges.",
+        body2: "Our comprehensive approach to behavioral and family dynamics has consistently delivered impactful results, fostering lasting growth and well-being across every area of our clients' lives.",
+        imageUrl: "https://media.base44.com/images/public/6a04a0888946eab0cca07906/6ad9ecccc_generated_87ea5579.png",
+        imageAlt: "Zen stones representing balance and healing"
       }
     },
     {
       id: 'servicesPreview',
       enabled: true,
       data: {
-        tag: "Clinical Services",
-        heading: "Comprehensive care for mind and life",
-        description: "A curated suite of evidence-based treatments designed to address the full spectrum of mental health needs.",
-        buttonText: "Explore All Services",
-        buttonLink: "/services"
+        tag: "Comprehensive Care",
+        heading: "Our Services",
+        description: "",
+        buttonText: "View All Services",
+        buttonLink: "/services",
+        items: [
+          {
+            icon: "Brain",
+            title: "Individual Therapy",
+            description: "Navigate anxiety, depression, and life transitions with evidence-based therapeutic approaches tailored to your unique needs."
+          },
+          {
+            icon: "Users",
+            title: "Couples Counseling",
+            description: "Strengthen your relationship through effective communication strategies and renewed emotional connection."
+          },
+          {
+            icon: "Baby",
+            title: "Adolescent Counseling",
+            description: "Specialized support for teens facing behavioral challenges, identity struggles, and family transitions."
+          },
+          {
+            icon: "UsersRound",
+            title: "Group Therapy",
+            description: "Small, customized groups for women, men, addiction recovery, grief, trauma, and more healing together in a supportive space."
+          },
+          {
+            icon: "Heart",
+            title: "Family Therapy",
+            description: "Heal family dynamics and create healthier patterns through systemic therapeutic intervention."
+          },
+          {
+            icon: "Brain",
+            title: "Trauma & EMDR",
+            description: "Specialized trauma recovery using EMDR and other proven modalities for deep, lasting healing."
+          }
+        ]
       }
     },
     {
       id: 'integratedCare',
       enabled: true,
       data: {
-        tag: "Integrated Approach",
-        heading: "Therapy & Psychiatry in Harmony",
-        description: "Most mental health practices operate in silos — therapists on one side, psychiatrists on another. At City Psychology, our clinicians collaborate closely to provide unified care.",
-        feature1Title: "Coordinated Treatment Plans",
-        feature1Desc: "Your therapist and medical provider communicate continuously to align medication management with psychotherapeutic goals.",
-        feature2Title: "Evidence-Based Modalities",
-        feature2Desc: "We combine CBT, EMDR, psychodynamic, and lifestyle interventions for sustainable, whole-person healing."
+        tag: "The Synergy of Science",
+        heading: "Integrated Healing",
+        description: "",
+        leftTitle: "Your Challenges",
+        leftItems: [
+          "Anxiety & Depression",
+          "Relationship Conflict",
+          "Behavioral Challenges",
+          "Trauma & PTSD",
+          "Addiction Recovery",
+          "Life Transitions"
+        ],
+        centerTitle: "Experience\nIntegrated Healing",
+        centerSubtitle: "Where therapy and psychiatry converge for complete mental wellness.",
+        buttonText: "Get Started",
+        buttonLink: "/contact",
+        rightTitle: "Our Solutions",
+        rightItems: [
+          "CBT & EMDR Therapy",
+          "Couples & Family Systems",
+          "Adolescent Behavioral Plans",
+          "Integrated Psychiatric Care",
+          "Evidence-Based Interventions",
+          "Group Therapy"
+        ]
       }
     },
     {
@@ -139,17 +218,29 @@ async function main() {
       enabled: true,
       data: {
         tag: "Client Experiences",
-        heading: "Stories of healing and growth",
+        heading: "Stories of",
+        highlightText: "Transformation",
         items: [
           {
-            quote: "City Psychology changed my entire perspective on therapy. The environment is calming, professional, and deeply attentive to my individual needs.",
-            author: "Client in West Palm Beach",
-            tag: "Individual Therapy"
+            quote: "City Psychology has been a game-changer for our family. The integrated approach between therapy and understanding our needs made all the difference. We finally feel like we're moving forward together.",
+            author: "Sarah M.",
+            context: "Family Therapy Client",
+            text: "City Psychology has been a game-changer for our family. The integrated approach between therapy and understanding our needs made all the difference. We finally feel like we're moving forward together.",
+            tag: "Family Therapy Client"
           },
           {
-            quote: "The integrated care model made all the difference. Having my therapy and medication coordinated under one roof gave me clarity and confidence.",
-            author: "Client in Palm Beach County",
-            tag: "Integrated Care"
+            quote: "I was hesitant about starting counseling, but the team at City Psychology made me feel safe from day one. The combination of talk therapy and a structured plan gave me tools I use every single day.",
+            author: "James R.",
+            context: "Individual Counseling Client",
+            text: "I was hesitant about starting counseling, but the team at City Psychology made me feel safe from day one. The combination of talk therapy and a structured plan gave me tools I use every single day.",
+            tag: "Individual Counseling Client"
+          },
+          {
+            quote: "After trying several therapists, we found City Psychology and finally felt heard. Their approach to couples counseling is thoughtful, structured, and genuinely transformative.",
+            author: "Michelle & David K.",
+            context: "Couples Counseling Clients",
+            text: "After trying several therapists, we found City Psychology and finally felt heard. Their approach to couples counseling is thoughtful, structured, and genuinely transformative.",
+            tag: "Couples Counseling Clients"
           }
         ]
       }
@@ -158,9 +249,11 @@ async function main() {
       id: 'cta',
       enabled: true,
       data: {
-        heading: "Take the first step toward lasting change",
-        description: "Start with a complimentary, no-obligation consultation. Let's find the right path forward together.",
-        buttonText: "Schedule Consultation",
+        tag: "Your Journey Starts Here",
+        heading: "Ready to Build a",
+        highlightText: "Life You Love?",
+        description: "Begin with a complimentary consultation. No obligation, just a conversation to see if City Psychology is the right fit for you.",
+        buttonText: "Book Free Consultation",
         buttonLink: "/contact"
       }
     },
@@ -179,7 +272,7 @@ async function main() {
     });
   }
 
-  // 4. Seed Dynamic Pages (Services, Team, About, FAQ)
+  // 4. Seed Dynamic Pages (Services, Team, About, FAQ matching static pages 100%)
   const dynamicPages = [
     {
       id: "page_services",
@@ -201,141 +294,8 @@ async function main() {
       ogTitle: "Our Services - City Psychology",
       ogDescription: "A curated suite of evidence-based treatments designed to address the full spectrum of mental health needs.",
       ogImage: "https://media.base44.com/images/public/6a04a0888946eab0cca07906/3fb221ca4_generated_7b9764f7.png",
-      contentHtml: `<!-- Services Hero Banner -->
-<section class="relative pt-36 pb-20 overflow-hidden bg-slate-50/70 border-b border-slate-100">
-  <div class="relative max-w-4xl mx-auto px-6 text-center">
-    <p class="text-sky-600 font-sans text-xs tracking-[0.3em] uppercase mb-4 font-bold">
-      Comprehensive Care
-    </p>
-    <h1 class="font-serif text-5xl md:text-6xl font-bold text-slate-900 mb-6 tracking-tight">
-      Our Services
-    </h1>
-    <p class="text-slate-600 font-sans text-lg leading-relaxed max-w-2xl mx-auto">
-      A curated suite of evidence-based treatments designed to address the full spectrum of mental health needs from individual therapy to integrated psychiatric care.
-    </p>
-  </div>
-</section>
-
-<!-- Services Grid Section -->
-<section class="py-20 bg-white">
-  <div class="max-w-7xl mx-auto px-6">
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-      <!-- 1. Individual Counseling -->
-      <div class="p-8 rounded-2xl bg-white border border-slate-200/80 hover:border-sky-300 hover:shadow-xl hover:shadow-sky-500/5 transition-all duration-300">
-        <div class="w-14 h-14 rounded-xl bg-sky-50 flex items-center justify-center mb-6 text-sky-600 text-2xl font-bold">🧠</div>
-        <h3 class="font-serif text-2xl font-bold text-slate-900 mb-4">Individual Counseling</h3>
-        <p class="text-slate-600 font-sans text-[15px] leading-[1.8] mb-6">
-          Life can be full of anxiety, dead-end situations, or feelings of emptiness. Our evidence-based individual therapy helps you navigate challenges with CBT, EMDR, and psychodynamic approaches tailored to your unique story.
-        </p>
-        <div class="pt-4 border-t border-slate-100">
-          <p class="text-xs font-sans text-slate-400 font-semibold tracking-wider uppercase mb-3">Approaches</p>
-          <div class="flex flex-wrap gap-2">
-            <span class="text-xs font-sans text-slate-700 px-3 py-1 rounded-full bg-slate-100 border border-slate-200">Cognitive Behavioral (CBT)</span>
-            <span class="text-xs font-sans text-slate-700 px-3 py-1 rounded-full bg-slate-100 border border-slate-200">EMDR</span>
-            <span class="text-xs font-sans text-slate-700 px-3 py-1 rounded-full bg-slate-100 border border-slate-200">Psychodynamic</span>
-            <span class="text-xs font-sans text-slate-700 px-3 py-1 rounded-full bg-slate-100 border border-slate-200">Solution-Focused</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- 2. Adolescent Counseling -->
-      <div class="p-8 rounded-2xl bg-white border border-slate-200/80 hover:border-sky-300 hover:shadow-xl hover:shadow-sky-500/5 transition-all duration-300">
-        <div class="w-14 h-14 rounded-xl bg-sky-50 flex items-center justify-center mb-6 text-sky-600 text-2xl font-bold">👶</div>
-        <h3 class="font-serif text-2xl font-bold text-slate-900 mb-4">Adolescent Counseling</h3>
-        <p class="text-slate-600 font-sans text-[15px] leading-[1.8] mb-6">
-          Teens face unique challenges: family changes, identity struggles, peer pressure. Unlike adults, they cannot yet draw on past solution strategies. We provide age-appropriate therapeutic support including play therapy for younger clients.
-        </p>
-        <div class="pt-4 border-t border-slate-100">
-          <p class="text-xs font-sans text-slate-400 font-semibold tracking-wider uppercase mb-3">Approaches</p>
-          <div class="flex flex-wrap gap-2">
-            <span class="text-xs font-sans text-slate-700 px-3 py-1 rounded-full bg-slate-100 border border-slate-200">Play Therapy</span>
-            <span class="text-xs font-sans text-slate-700 px-3 py-1 rounded-full bg-slate-100 border border-slate-200">Family Systems</span>
-            <span class="text-xs font-sans text-slate-700 px-3 py-1 rounded-full bg-slate-100 border border-slate-200">Behavioral Intervention</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- 3. Couples Counseling -->
-      <div class="p-8 rounded-2xl bg-white border border-slate-200/80 hover:border-sky-300 hover:shadow-xl hover:shadow-sky-500/5 transition-all duration-300">
-        <div class="w-14 h-14 rounded-xl bg-sky-50 flex items-center justify-center mb-6 text-sky-600 text-2xl font-bold">👥</div>
-        <h3 class="font-serif text-2xl font-bold text-slate-900 mb-4">Couples Counseling</h3>
-        <p class="text-slate-600 font-sans text-[15px] leading-[1.8] mb-6">
-          Even without major problems, routine and boredom can erode partnerships. We help couples rediscover connection, rebuild communication, and navigate conflict with proven therapeutic frameworks.
-        </p>
-        <div class="pt-4 border-t border-slate-100">
-          <p class="text-xs font-sans text-slate-400 font-semibold tracking-wider uppercase mb-3">Approaches</p>
-          <div class="flex flex-wrap gap-2">
-            <span class="text-xs font-sans text-slate-700 px-3 py-1 rounded-full bg-slate-100 border border-slate-200">Interpersonal Therapy</span>
-            <span class="text-xs font-sans text-slate-700 px-3 py-1 rounded-full bg-slate-100 border border-slate-200">Family/Marital</span>
-            <span class="text-xs font-sans text-slate-700 px-3 py-1 rounded-full bg-slate-100 border border-slate-200">Motivational Interviewing</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- 4. Family Therapy -->
-      <div class="p-8 rounded-2xl bg-white border border-slate-200/80 hover:border-sky-300 hover:shadow-xl hover:shadow-sky-500/5 transition-all duration-300">
-        <div class="w-14 h-14 rounded-xl bg-sky-50 flex items-center justify-center mb-6 text-sky-600 text-2xl font-bold">❤️</div>
-        <h3 class="font-serif text-2xl font-bold text-slate-900 mb-4">Family Therapy</h3>
-        <p class="text-slate-600 font-sans text-[15px] leading-[1.8] mb-6">
-          Family dynamics shape who we are. Our systemic approach addresses the whole family unit, healing patterns that have been passed down and creating healthier ways of relating to one another.
-        </p>
-        <div class="pt-4 border-t border-slate-100">
-          <p class="text-xs font-sans text-slate-400 font-semibold tracking-wider uppercase mb-3">Approaches</p>
-          <div class="flex flex-wrap gap-2">
-            <span class="text-xs font-sans text-slate-700 px-3 py-1 rounded-full bg-slate-100 border border-slate-200">Family Systems</span>
-            <span class="text-xs font-sans text-slate-700 px-3 py-1 rounded-full bg-slate-100 border border-slate-200">Interpersonal</span>
-            <span class="text-xs font-sans text-slate-700 px-3 py-1 rounded-full bg-slate-100 border border-slate-200">Solution-Focused</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- 5. Trauma & EMDR -->
-      <div class="p-8 rounded-2xl bg-white border border-slate-200/80 hover:border-sky-300 hover:shadow-xl hover:shadow-sky-500/5 transition-all duration-300">
-        <div class="w-14 h-14 rounded-xl bg-sky-50 flex items-center justify-center mb-6 text-sky-600 text-2xl font-bold">✨</div>
-        <h3 class="font-serif text-2xl font-bold text-slate-900 mb-4">Trauma & EMDR</h3>
-        <p class="text-slate-600 font-sans text-[15px] leading-[1.8] mb-6">
-          Specialized trauma recovery using Eye Movement Desensitization and Reprocessing (EMDR) alongside traditional therapeutic modalities for deep, lasting healing from PTSD, abuse, and traumatic experiences.
-        </p>
-        <div class="pt-4 border-t border-slate-100">
-          <p class="text-xs font-sans text-slate-400 font-semibold tracking-wider uppercase mb-3">Approaches</p>
-          <div class="flex flex-wrap gap-2">
-            <span class="text-xs font-sans text-slate-700 px-3 py-1 rounded-full bg-slate-100 border border-slate-200">EMDR</span>
-            <span class="text-xs font-sans text-slate-700 px-3 py-1 rounded-full bg-slate-100 border border-slate-200">Trauma-Focused CBT</span>
-            <span class="text-xs font-sans text-slate-700 px-3 py-1 rounded-full bg-slate-100 border border-slate-200">Psychodynamic</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- 6. Addiction Counseling -->
-      <div class="p-8 rounded-2xl bg-white border border-slate-200/80 hover:border-sky-300 hover:shadow-xl hover:shadow-sky-500/5 transition-all duration-300">
-        <div class="w-14 h-14 rounded-xl bg-sky-50 flex items-center justify-center mb-6 text-sky-600 text-2xl font-bold">🛡️</div>
-        <h3 class="font-serif text-2xl font-bold text-slate-900 mb-4">Addiction Counseling</h3>
-        <p class="text-slate-600 font-sans text-[15px] leading-[1.8] mb-6">
-          Our comprehensive approach to addiction addresses both substance use and underlying mental health conditions, providing a sustainable path toward flourishing.
-        </p>
-        <div class="pt-4 border-t border-slate-100">
-          <p class="text-xs font-sans text-slate-400 font-semibold tracking-wider uppercase mb-3">Approaches</p>
-          <div class="flex flex-wrap gap-2">
-            <span class="text-xs font-sans text-slate-700 px-3 py-1 rounded-full bg-slate-100 border border-slate-200">Motivational Interviewing</span>
-            <span class="text-xs font-sans text-slate-700 px-3 py-1 rounded-full bg-slate-100 border border-slate-200">CBT</span>
-            <span class="text-xs font-sans text-slate-700 px-3 py-1 rounded-full bg-slate-100 border border-slate-200">Relapse Prevention</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Bottom CTA -->
-    <div class="mt-16 text-center">
-      <p class="text-slate-500 font-sans text-base mb-6">
-        Ready to begin? Sessions are $150 with sliding scale options available for eligible clients.
-      </p>
-      <a href="/contact" class="inline-flex items-center gap-2 px-8 py-4 bg-sky-600 hover:bg-sky-700 text-white font-sans font-semibold text-sm rounded-full transition-all shadow-lg shadow-sky-600/20">
-        Book Your Consultation →
-      </a>
-    </div>
-  </div>
-</section>`,
-      customCss: ``
+      contentHtml: buildServicesHtml(),
+      customCss: ""
     },
     {
       id: "page_team",
@@ -357,93 +317,8 @@ async function main() {
       ogTitle: "Meet Our Team - City Psychology",
       ogDescription: "A curated team of clinical professionals dedicated to integrated, personalized mental health care in West Palm Beach.",
       ogImage: "https://media.base44.com/images/public/6a04a0888946eab0cca07906/3837dd055_generated_c46509ac.png",
-      contentHtml: `<!-- Team Hero Banner -->
-<section class="relative pt-36 pb-20 overflow-hidden bg-slate-50/70 border-b border-slate-100">
-  <div class="relative max-w-4xl mx-auto px-6 text-center">
-    <p class="text-sky-600 font-sans text-xs tracking-[0.3em] uppercase mb-4 font-bold">
-      The Roster
-    </p>
-    <h1 class="font-serif text-5xl md:text-6xl font-bold text-slate-900 mb-6 tracking-tight">
-      Meet Our Team
-    </h1>
-    <p class="text-slate-600 font-sans text-lg leading-relaxed max-w-2xl mx-auto">
-      A curated team of clinical professionals dedicated to integrated, personalized mental health care in West Palm Beach.
-    </p>
-  </div>
-</section>
-
-<!-- Team Providers List Section -->
-<section class="py-20 bg-white">
-  <div class="max-w-6xl mx-auto px-6 space-y-10">
-    <!-- Provider 1 -->
-    <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 items-start p-8 rounded-2xl bg-white border border-slate-200/80 hover:border-sky-300 hover:shadow-xl hover:shadow-sky-500/5 transition-all">
-      <div class="lg:col-span-2 aspect-[3/4] rounded-xl overflow-hidden bg-slate-100">
-        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&auto=format&fit=crop" alt="Dillon A. Steinman" class="w-full h-full object-cover" />
-      </div>
-      <div class="lg:col-span-3 flex flex-col justify-center">
-        <p class="text-sky-600 font-sans text-xs tracking-[0.2em] uppercase font-bold mb-2">Founder & Licensed Mental Health Counselor</p>
-        <h3 class="font-serif text-3xl font-bold text-slate-900 mb-4">Dillon A. Steinman, LMHC, QS</h3>
-        <p class="text-slate-600 font-sans text-[15px] leading-[1.8] mb-6">
-          With over two decades of experience across outpatient private practice, youth counseling, foster care trauma, and addiction recovery, Dillon founded City Psychology to provide an integrated standard of clinical excellence and compassionate healing.
-        </p>
-        <div>
-          <p class="text-xs font-sans text-slate-400 font-semibold tracking-wider uppercase mb-3">Specialties</p>
-          <div class="flex flex-wrap gap-2">
-            <span class="text-xs font-sans text-slate-700 px-3 py-1 rounded-full bg-slate-100 border border-slate-200">Youth Counseling</span>
-            <span class="text-xs font-sans text-slate-700 px-3 py-1 rounded-full bg-slate-100 border border-slate-200">Family Therapy</span>
-            <span class="text-xs font-sans text-slate-700 px-3 py-1 rounded-full bg-slate-100 border border-slate-200">Clinical Supervision</span>
-            <span class="text-xs font-sans text-slate-700 px-3 py-1 rounded-full bg-slate-100 border border-slate-200">Trauma Recovery</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Provider 2 -->
-    <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 items-start p-8 rounded-2xl bg-white border border-slate-200/80 hover:border-sky-300 hover:shadow-xl hover:shadow-sky-500/5 transition-all">
-      <div class="lg:col-span-2 aspect-[3/4] rounded-xl overflow-hidden bg-slate-100">
-        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&auto=format&fit=crop" alt="Peter Copan" class="w-full h-full object-cover" />
-      </div>
-      <div class="lg:col-span-3 flex flex-col justify-center">
-        <p class="text-sky-600 font-sans text-xs tracking-[0.2em] uppercase font-bold mb-2">Registered Mental Health Counselor Intern</p>
-        <h3 class="font-serif text-3xl font-bold text-slate-900 mb-4">Peter Copan</h3>
-        <p class="text-slate-600 font-sans text-[15px] leading-[1.8] mb-6">
-          Peter blends neuroscience insights with ancient wisdom, offering warm hospitality and kindness to help clients break through pain and trauma toward a purposeful, thriving life.
-        </p>
-        <div>
-          <p class="text-xs font-sans text-slate-400 font-semibold tracking-wider uppercase mb-3">Specialties</p>
-          <div class="flex flex-wrap gap-2">
-            <span class="text-xs font-sans text-slate-700 px-3 py-1 rounded-full bg-slate-100 border border-slate-200">Trauma-Informed Therapy</span>
-            <span class="text-xs font-sans text-slate-700 px-3 py-1 rounded-full bg-slate-100 border border-slate-200">Neuroscience Approaches</span>
-            <span class="text-xs font-sans text-slate-700 px-3 py-1 rounded-full bg-slate-100 border border-slate-200">Self-Discovery</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Provider 3 -->
-    <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 items-start p-8 rounded-2xl bg-white border border-slate-200/80 hover:border-sky-300 hover:shadow-xl hover:shadow-sky-500/5 transition-all">
-      <div class="lg:col-span-2 aspect-[3/4] rounded-xl overflow-hidden bg-slate-100">
-        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&auto=format&fit=crop" alt="Michelle Cook" class="w-full h-full object-cover" />
-      </div>
-      <div class="lg:col-span-3 flex flex-col justify-center">
-        <p class="text-sky-600 font-sans text-xs tracking-[0.2em] uppercase font-bold mb-2">Licensed Mental Health Counselor</p>
-        <h3 class="font-serif text-3xl font-bold text-slate-900 mb-4">Michelle Cook, LMHC</h3>
-        <p class="text-slate-600 font-sans text-[15px] leading-[1.8] mb-6">
-          Michelle specializes in EMDR trauma processing, empowering clients weighed down by past distress to find rapid relief, genuine connection, and practical emotional tools.
-        </p>
-        <div>
-          <p class="text-xs font-sans text-slate-400 font-semibold tracking-wider uppercase mb-3">Specialties</p>
-          <div class="flex flex-wrap gap-2">
-            <span class="text-xs font-sans text-slate-700 px-3 py-1 rounded-full bg-slate-100 border border-slate-200">EMDR</span>
-            <span class="text-xs font-sans text-slate-700 px-3 py-1 rounded-full bg-slate-100 border border-slate-200">Trauma Processing</span>
-            <span class="text-xs font-sans text-slate-700 px-3 py-1 rounded-full bg-slate-100 border border-slate-200">Faith-Integrated Counseling</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>`,
-      customCss: ``
+      contentHtml: buildTeamHtml(),
+      customCss: ""
     },
     {
       id: "page_about",
@@ -465,72 +340,8 @@ async function main() {
       ogTitle: "About Us - City Psychology",
       ogDescription: "A new standard of mental health care in West Palm Beach where clinical excellence meets coastal serenity.",
       ogImage: "https://media.base44.com/images/public/6a04a0888946eab0cca07906/f7aed5b5b_generated_84790256.png",
-      contentHtml: `<!-- About Hero Banner -->
-<section class="relative pt-36 pb-20 overflow-hidden bg-slate-50/70 border-b border-slate-100">
-  <div class="relative max-w-4xl mx-auto px-6 text-center">
-    <p class="text-sky-600 font-sans text-xs tracking-[0.3em] uppercase mb-4 font-bold">
-      Our Story
-    </p>
-    <h1 class="font-serif text-5xl md:text-6xl font-bold text-slate-900 mb-6 tracking-tight">
-      About City Psychology
-    </h1>
-    <p class="text-slate-600 font-sans text-lg leading-relaxed max-w-2xl mx-auto">
-      Where clinical excellence meets coastal serenity in West Palm Beach.
-    </p>
-  </div>
-</section>
-
-<!-- Story & Vision -->
-<section class="py-20 bg-white">
-  <div class="max-w-7xl mx-auto px-6 space-y-16">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-      <div class="rounded-2xl overflow-hidden aspect-[4/3] bg-slate-100 shadow-md">
-        <img src="https://media.base44.com/images/public/6a04a0888946eab0cca07906/f7aed5b5b_generated_84790256.png" alt="City Psychology Office" class="w-full h-full object-cover" />
-      </div>
-      <div class="space-y-6">
-        <h2 class="font-serif text-3xl md:text-4xl font-bold text-slate-900">A Sanctuary for Clinical Excellence</h2>
-        <p class="text-slate-600 font-sans text-[16px] leading-[1.8]">
-          City Psychology was founded with a vision: to create a new standard of mental health care in West Palm Beach. Not just another counseling office, but a curated infrastructure for human flourishing where clinical excellence meets coastal serenity.
-        </p>
-        <p class="text-slate-600 font-sans text-[16px] leading-[1.8]">
-          With over a decade of experience in behavioral health, family dynamics, and addiction counseling, our founder recognized that true healing requires more than talk therapy alone. We offer comprehensive, coordinated care under one collaborative roof.
-        </p>
-      </div>
-    </div>
-
-    <!-- Values Grid -->
-    <div class="py-12 rounded-3xl bg-slate-50 border border-slate-200/80 p-8 md:p-12">
-      <h3 class="font-serif text-3xl font-bold text-slate-900 text-center mb-10">Our Core Values</h3>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <div class="p-6 rounded-xl border border-slate-200 bg-white shadow-xs">
-          <h4 class="font-serif text-lg font-bold text-sky-600 mb-2">Evidence-Based Care</h4>
-          <p class="text-slate-600 font-sans text-sm leading-relaxed">Every approach is grounded in proven clinical methodologies and ongoing research.</p>
-        </div>
-        <div class="p-6 rounded-xl border border-slate-200 bg-white shadow-xs">
-          <h4 class="font-serif text-lg font-bold text-sky-600 mb-2">Integrated Treatment</h4>
-          <p class="text-slate-600 font-sans text-sm leading-relaxed">Therapy and psychiatry working in concert for comprehensive mental wellness.</p>
-        </div>
-        <div class="p-6 rounded-xl border border-slate-200 bg-white shadow-xs">
-          <h4 class="font-serif text-lg font-bold text-sky-600 mb-2">Client-Centered</h4>
-          <p class="text-slate-600 font-sans text-sm leading-relaxed">Your unique needs, values, and goals drive every aspect of your treatment plan.</p>
-        </div>
-        <div class="p-6 rounded-xl border border-slate-200 bg-white shadow-xs">
-          <h4 class="font-serif text-lg font-bold text-sky-600 mb-2">Accessible & Flexible</h4>
-          <p class="text-slate-600 font-sans text-sm leading-relaxed">Sliding scale options, flexible scheduling, and both in-person and telehealth sessions.</p>
-        </div>
-        <div class="p-6 rounded-xl border border-slate-200 bg-white shadow-xs">
-          <h4 class="font-serif text-lg font-bold text-sky-600 mb-2">Faith-Compatible</h4>
-          <p class="text-slate-600 font-sans text-sm leading-relaxed">Integration of Christian values for those who desire a faith-informed approach.</p>
-        </div>
-        <div class="p-6 rounded-xl border border-slate-200 bg-white shadow-xs">
-          <h4 class="font-serif text-lg font-bold text-sky-600 mb-2">Growth-Oriented</h4>
-          <p class="text-slate-600 font-sans text-sm leading-relaxed">Building a multi-disciplinary group to serve the Palm Beach community at scale.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>`,
-      customCss: ``
+      contentHtml: buildAboutHtml(),
+      customCss: ""
     },
     {
       id: "page_faq",
@@ -552,61 +363,8 @@ async function main() {
       ogTitle: "Frequently Asked Questions - City Psychology",
       ogDescription: "Everything you need to know about starting your therapeutic journey with City Psychology.",
       ogImage: "https://media.base44.com/images/public/6a04a0888946eab0cca07906/3837dd055_generated_c46509ac.png",
-      contentHtml: `<!-- FAQ Hero Banner -->
-<section class="relative pt-36 pb-20 overflow-hidden bg-slate-50/70 border-b border-slate-100">
-  <div class="relative max-w-4xl mx-auto px-6 text-center">
-    <p class="text-sky-600 font-sans text-xs tracking-[0.3em] uppercase mb-4 font-bold">
-      Common Questions
-    </p>
-    <h1 class="font-serif text-5xl md:text-6xl font-bold text-slate-900 mb-6 tracking-tight">
-      Frequently Asked Questions
-    </h1>
-    <p class="text-slate-600 font-sans text-lg leading-relaxed max-w-2xl mx-auto">
-      Everything you need to know about starting your therapeutic journey with City Psychology.
-    </p>
-  </div>
-</section>
-
-<!-- FAQ List Section -->
-<section class="py-20 bg-white">
-  <div class="max-w-4xl mx-auto px-6 space-y-6">
-    <div class="p-6 rounded-2xl bg-white border border-slate-200/80 shadow-xs hover:border-sky-300 transition-all">
-      <h3 class="font-serif text-xl font-bold text-slate-900 mb-3">What should I expect during my first visit?</h3>
-      <p class="text-slate-600 font-sans text-[15px] leading-[1.8]">
-        Your first session begins with a comprehensive assessment where we discuss your history, current challenges, and goals. This helps us create a personalized treatment plan tailored to you.
-      </p>
-    </div>
-
-    <div class="p-6 rounded-2xl bg-white border border-slate-200/80 shadow-xs hover:border-sky-300 transition-all">
-      <h3 class="font-serif text-xl font-bold text-slate-900 mb-3">Do you accept insurance?</h3>
-      <p class="text-slate-600 font-sans text-[15px] leading-[1.8]">
-        Yes, we accept most major insurance plans including Aetna, BlueCross BlueShield, Cigna, United Healthcare, Humana, Medicare, and Tricare. We will help verify your benefits beforehand.
-      </p>
-    </div>
-
-    <div class="p-6 rounded-2xl bg-white border border-slate-200/80 shadow-xs hover:border-sky-300 transition-all">
-      <h3 class="font-serif text-xl font-bold text-slate-900 mb-3">How much do sessions cost?</h3>
-      <p class="text-slate-600 font-sans text-[15px] leading-[1.8]">
-        Our standard session rate is $150. We also offer sliding scale options for eligible clients to ensure therapy remains accessible.
-      </p>
-    </div>
-
-    <div class="p-6 rounded-2xl bg-white border border-slate-200/80 shadow-xs hover:border-sky-300 transition-all">
-      <h3 class="font-serif text-xl font-bold text-slate-900 mb-3">Do you offer telehealth and online sessions?</h3>
-      <p class="text-slate-600 font-sans text-[15px] leading-[1.8]">
-        Absolutely. We provide both in-person sessions at our West Palm Beach office and secure, HIPAA-compliant telehealth video sessions.
-      </p>
-    </div>
-
-    <div class="p-6 rounded-2xl bg-white border border-slate-200/80 shadow-xs hover:border-sky-300 transition-all">
-      <h3 class="font-serif text-xl font-bold text-slate-900 mb-3">Is everything confidential?</h3>
-      <p class="text-slate-600 font-sans text-[15px] leading-[1.8]">
-        100% confidential. All records, communications, and sessions are strictly protected under HIPAA regulations and medical ethics standards.
-      </p>
-    </div>
-  </div>
-</section>`,
-      customCss: ``
+      contentHtml: buildFaqHtml(),
+      customCss: ""
     }
   ];
 

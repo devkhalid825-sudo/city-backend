@@ -23,9 +23,25 @@ export const getPages = async (req, res, next) => {
 export const getPageByIdOrSlug = async (req, res, next) => {
   try {
     const { slugOrId } = req.params;
+    const lower = slugOrId.toLowerCase();
+
+    // Support both 'blog/xyz' and 'xyz', as well as 'blogs'/'blog'
+    const stripped = lower.replace(/^(blogs?\/)/, '');
+    const slugsToCheck = [
+      lower,
+      stripped,
+      `blog/${stripped}`,
+      `blogs/${stripped}`,
+    ];
+    if (lower === 'blog') slugsToCheck.push('blogs');
+    if (lower === 'blogs') slugsToCheck.push('blog');
+
     const page = await prisma.page.findFirst({
       where: {
-        OR: [{ id: slugOrId }, { slug: slugOrId.toLowerCase() }],
+        OR: [
+          { id: slugOrId },
+          { slug: { in: Array.from(new Set(slugsToCheck)) } },
+        ],
       },
     });
 

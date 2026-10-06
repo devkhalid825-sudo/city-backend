@@ -11,6 +11,14 @@ import {
 const router = Router();
 
 router.get('/', getPages);
+router.get('/blog/:postSlug', (req, res, next) => {
+  req.params.slugOrId = `blog/${req.params.postSlug}`;
+  return getPageByIdOrSlug(req, res, next);
+});
+router.get('/blogs/:postSlug', (req, res, next) => {
+  req.params.slugOrId = `blog/${req.params.postSlug}`;
+  return getPageByIdOrSlug(req, res, next);
+});
 router.get('/:slugOrId', getPageByIdOrSlug);
 router.post('/', createPage);
 router.put('/:id', updatePage);
